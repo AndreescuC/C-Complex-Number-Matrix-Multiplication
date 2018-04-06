@@ -9,6 +9,6 @@
  * Add your BLAS implementation here
  */
 double* my_solver(int N, double *A) {
-    printf("BLAS SOLVER\n");
+    printf("BLASS SOLVER\n");
     return NULL;
 }
