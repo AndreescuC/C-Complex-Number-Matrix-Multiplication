@@ -1,0 +1,12 @@
+#Ignoring CLion internal files
+/ .idea/
+.idea/workspace.xml
+.idea/
+
+#Ignoring cmake related files
+/ cmake-build-debug
+cmake-build-debug/
+CMakeLists.txt
+
+#Ignoring input files
+input
