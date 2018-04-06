@@ -127,8 +127,8 @@ int generate_data(struct test t, double **A)
 
     for (i = 0; i < N; ++i) {
         for ( j = 0; j < N; ++j) {
-            aux[2 * (i * N + j)] = get_rand_double(RANGE); // real
-            aux[2 * (i * N + j) + 1] = get_rand_double(RANGE); // imaginary
+            aux[2 * (i * N + j)] = i; // real
+            aux[2 * (i * N + j) + 1] = j; // imaginary
         }
     }
 
@@ -152,6 +152,7 @@ int run_test(struct test t, Solver solve, float *elapsed)
         return ret;
 
     gettimeofday(&start, NULL);
+
     res = solve(t.N, A);
     gettimeofday(&end, NULL);
 
