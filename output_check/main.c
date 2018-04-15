@@ -17,34 +17,28 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    double out1[BUFF], out2[BUFF];
+    int i = 0;
+    double puppet1, puppet2, read1, read2;
     char message[50];
 
     FILE* fd_out1 = fopen(argv[1], "rb");
-    FILE* fd_out2 = fopen(argv[1], "rb");
+    FILE* fd_out2 = fopen(argv[2], "rb");
 
-    size_t out_size1 = fread(out1, BUFF, 1, fd_out1);
-    size_t out_size2 = fread(out2, BUFF, 1, fd_out2);
-
-    if (out_size1 != out_size2) {
-        sprintf(message, "Different bytes nr read(%d != %d)", (int)out_size1, (int)out_size2);
-        log_exit(message);
-    }
-    if (BUFF < out_size1) {
-        sprintf(message, "Read more than 50000 from out1(%d)", (int)out_size1);
-        log_exit(message);
-    }
-    if (BUFF < out_size2) {
-        sprintf(message, "Read more than 50000 from out2(%d)", (int)out_size2);
-        log_exit(message);
-    }
-
-    int i, size = (int)out_size1;
-    for (i=0; i<size; i++) {
-        if (fabs(out1[i] - out2[i]) > 0.01) {
-            sprintf(message, "Difference at %d/%d(%f != %f)", i, size, out1[i], out2[i]);
+    while (1) {
+        read1 = fread(&puppet1, sizeof(double), 1, fd_out1);
+        read2 = fread(&puppet2, sizeof(double), 1, fd_out2);
+        if (read1 != 1 || read2 != 1) {
+            break;
+        }
+        printf("Comparing %f with %f\n", puppet1, puppet2);
+        if (fabs(puppet1 - puppet2) > 0.01) {
+            sprintf(message, "Difference at %d (%f != %f)", i, puppet1, puppet2);
             log_exit(message);
         }
+        i++;
     }
+
     printf("OK\n");
+
+    return 0;
 }

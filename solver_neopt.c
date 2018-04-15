@@ -1,6 +1,6 @@
 #include "matrix_utils.h"
 
-double* compute_neopt(double* A, double* B, int N)
+double* compute_neopt(double* A, int N)
 {
     int i, j, k;
     complex c;
@@ -11,7 +11,7 @@ double* compute_neopt(double* A, double* B, int N)
             for (k = 0; k < N; k++) {
                 c = multiply(
                         A[2 * (i * N + k)], A[2 * (i * N + k) + 1],
-                        B[2 * (k * N + j)], B[2 * (k * N + j) + 1]
+                        A[2 * (j * N + k)], A[2 * (j * N + k) + 1]
                 );
                 res[2 * (i * N + j)] += c.real;
                 res[2 * (i * N + j) + 1] += c.imag;
@@ -27,8 +27,6 @@ double* compute_neopt(double* A, double* B, int N)
 double* my_solver(int N, double *A)
 {
     printf("NEOPT SOLVER\n");
-
-    double *AT = transpose_matrix(A, N);
-    double *result = compute_neopt(A, AT, N);
+    double *result = compute_neopt(A, N);
     return result;
 }
