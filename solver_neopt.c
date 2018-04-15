@@ -28,10 +28,7 @@ double* my_solver(int N, double *A)
 {
     printf("NEOPT SOLVER\n");
 
-    display_matrix(A,N);
     double *AT = transpose_matrix(A, N);
-    display_matrix(AT, N);
     double *result = compute_neopt(A, AT, N);
-    display_matrix(result, N);
     return result;
 }

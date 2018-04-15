@@ -5,7 +5,6 @@
  */
 #include "utils.h"
 #include "CBLAS/include/cblas.h"
-#include "matrix_utils.h"
 
 /*
  * Add your BLAS implementation here
@@ -19,11 +18,10 @@ double* my_solver(int N, double *A) {
 
     double *C = malloc(N * N * 2 * sizeof(double));
 
-    int* one;
-    *one = 1;
+    int one = 1;
+    int zero = 0;
 
-    cblas_zsyrk(order, uplo, transpose, N, N, &one, A, N, 0, C, N);
-    display_matrix(C, N);
+    cblas_zsyrk(order, uplo, transpose, N, N, &one, A, N, &zero, C, N);
 
     return C;
 }

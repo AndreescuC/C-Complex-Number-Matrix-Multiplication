@@ -14,8 +14,6 @@ double* compute_opt(double* A, int N)
  */
 double* my_solver(int N, double *A) {
     printf("OPT SOLVER\n");
-    display_matrix(A,N);
     double *result = compute_opt(A, N);
-    display_matrix(result, N);
     return result;
 }
