@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
+#ifndef UTILS
+#define UTILS
+
 typedef double* (*Solver)(int, double *);
 
 #define get_rand_double(limit) ((((double)rand()) / RAND_MAX) * (2 * limit) - limit)
@@ -29,3 +32,5 @@ void free_data(double **);
 int generate_data(struct test, double **);
 
 int read_input_file(char *, int *, struct test **);
+
+#endif
